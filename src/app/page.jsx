@@ -2,21 +2,22 @@
 import React, { useState } from 'react';
 
 const Page = () => {
-  const [jobData, setJobData] = useState([]); 
+  // const [jobData, setJobData] = useState([]); 
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('/api/jobFetch');
-      const data = await response.json();
-      setJobData(data.jobData.data); 
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch('/api/jobFetch');
+  //     const data = await response.json();
+  //     setJobData(data.jobData.data); 
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
 
   return (
     <div>
-      <div onClick={fetchData}>Fetch</div>
+      {/* <div onClick={fetchData}>Refresh</div>
       <ul>
         {jobData.map((job, index) => (
           <li key={index}>
@@ -29,7 +30,7 @@ const Page = () => {
             <p>Job Comopany Name: {job.company.name}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

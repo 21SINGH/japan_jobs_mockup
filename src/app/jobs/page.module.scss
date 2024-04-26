@@ -1,0 +1,93 @@
+.main {
+  .top {
+    height: 40vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .center {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .heading {
+        margin-bottom: 5%;
+        h1 {
+          font-size: 3rem;
+          opacity: 0.8;
+        }
+      }
+      .subHeading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-secondary);
+        p {
+          margin-bottom: 10px;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+  .content {
+    display: flex;
+    .right {
+      width: 20%;
+      .data {
+        padding: 20px;
+        p {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+        .container {
+          color: var(--text-secondary);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          text-align: center;
+          .el,
+          .el1 {
+            width: 100px;
+            padding: 10px;
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+            border-radius: 5px;
+            background-color: var(--background);
+            margin-bottom: 10px;
+            font-size: 12px;
+          }
+          .el1 {
+            width: 100%;
+          }
+          .el:hover {
+            box-shadow: 0 0 21px 0 #4479e27c;
+            border: 1px solid #4479e27c;
+          }
+        }
+      }
+    }
+    .left {
+      width: 80%;
+      padding: 20px;
+      border-left: 0.1px solid var(--code-string);
+    }
+  }
+}
+
+.active {
+  border: 1px solid var(--code-string);
+}
+
+.noJobs {
+  color: red;
+  font-size: 1rem;
+  display: flex;
+  font-size: 1.2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+}
