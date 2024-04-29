@@ -1,5 +1,6 @@
 .box {
   background-color: var(--background);
+  opacity: 0.8;
   border: 0.1px solid var(--code-string);
   border-radius: 10px;
   padding: 20px;
@@ -77,6 +78,16 @@
         svg{
             fill: green;
         }
+    }
+  }
+}
+
+@media (max-width:500px) {
+  .box{
+    .top{
+      .right{
+        width: 100%;
+      }
     }
   }
 }

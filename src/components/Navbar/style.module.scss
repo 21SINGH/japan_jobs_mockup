@@ -1,4 +1,5 @@
 .main {
+  z-index: 99;
   position: sticky;
   top: 0;
   z-index: 99;
@@ -11,6 +12,7 @@
   padding-bottom: 10px;
   background-color: var(--background);
   .navbar {
+    z-index: 99;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,12 +56,8 @@
         cursor: pointer;
         transition: box-shadow 0.3s;
         border-radius: 10px;
-        background-color: var(--nav-color);
-        .icon {
-          width: 40px;
-          fill: var(--text-primary);
-          height: 20px;
-        }
+        background-color: var(--secondary-background);
+        
       }
       .el:hover {
         box-shadow: 0 0 21px 0 #4479e27c;
@@ -67,14 +65,50 @@
       }
     }
   }
-  .model {
-    position: absolute;
-    top: calc(100% + 30px);
-    z-index: 1;
-    left: calc(100% - 210px);
-    // border: 1px solid red;
-    border-radius: 10px;
-    background-color: var(--nav-color);
-    text-transform: none;
+}
+
+@media (max-width: 1300px) {
+  .main{
+    .navbar{
+      .left{
+        width: 12%;
+      }
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .main{
+    .navbar{
+      .left{
+        width: 14%;
+      }
+    }
+  }
+}
+@media (max-width: 900px) {
+  .main{
+    .navbar{
+      .left{
+        width: 18%;
+      }
+    }
+  }
+}
+@media (max-width: 650px) {
+  .main{
+    .navbar{
+      .left{
+        width: 35%;
+      }
+    }
+  }
+}
+@media (max-width: 375px) {
+  .main{
+    .navbar{
+      .left{
+        width: 45%;
+      }
+    }
   }
 }

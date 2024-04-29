@@ -15,7 +15,7 @@ export const GET = async (req, res) => {
       options
     );
     const data = await response.json();
-    console.log("api fetched", data);
+    // console.log("api fetched", data);
     return new NextResponse(
       JSON.stringify({ message: "job fetched successfully", jobData: data}),
       {
