@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "./page.module.scss";
 import JobCard from "@/components/JobCard";
 import Spinner from "@/components/Spinner";
 import AuroraHero from "@/components/AuroHero";
+import LanContext from "@/context/lanContext";
 
 const Jobs = () => {
   const [jobData, setJobData] = useState([]);
@@ -15,6 +16,7 @@ const Jobs = () => {
   const [jobDropdwon, setJobDropdwon] = useState(false);
   const [locaDropdwon, setLocaDropdwon] = useState(false);
   const [filter, setFilter] = useState(false);
+  const { language } = useContext(LanContext);
 
   useEffect(() => {
     const storedJobData = JSON.parse(localStorage.getItem("jobData"));
@@ -24,6 +26,61 @@ const Jobs = () => {
       fetchData();
     }
   }, []);
+
+  const jobTypeTranslations = [
+    { english: "Full-time", japanese: "フルタイム" },
+    { english: "Part-time", japanese: "パートタイム" },
+    { english: "Contract", japanese: "契約" },
+    { english: "Internship", japanese: "インターンシップ" },
+  ];
+  const locationTranslations = [
+    {
+      english: "Yokohama, Kanagawa, Japan (Remote)",
+      japanese: "横浜、神奈川、日本（リモート）",
+    },
+    { english: "Tokyo, Tokyo, Japan", japanese: "東京、東京、日本" },
+    {
+      english: "Chiba, Chiba, Japan (Remote)",
+      japanese: "千葉、千葉、日本（リモート）",
+    },
+    {
+      english: "Tokyo, Tokyo, Japan (Remote)",
+      japanese: "東京、東京、日本（リモート）",
+    },
+    { english: "Japan (Remote)", japanese: "日本（リモート）" },
+    {
+      english: "Osaka, Osaka, Japan (On-site)",
+      japanese: "大阪、大阪、日本（オンサイト）",
+    },
+    {
+      english: "Tokyo, Tokyo, Japan (On-site)",
+      japanese: "東京、東京、日本（オンサイト）",
+    },
+    { english: "Japan (On-site)", japanese: "日本（オンサイト）" },
+    { english: "Tokyo, Japan", japanese: "東京、日本" },
+    { english: "Tokyo, Japan (On-site)", japanese: "東京、日本（オンサイト）" },
+    {
+      english: "Tokyo, Tokyo, Japan (Hybrid)",
+      japanese: "東京、東京、日本（ハイブリッド）",
+    },
+    {
+      english: "Tokyo, Japan (Hybrid)",
+      japanese: "東京、日本（ハイブリッド）",
+    },
+    {
+      english: "Osaka, Osaka, Japan (Remote)",
+      japanese: "大阪、大阪、日本（リモート）",
+    },
+    { english: "Osaka, Osaka, Japan", japanese: "大阪、大阪、日本" },
+    {
+      english: "Sapporo, Hokkaido, Japan (Remote)",
+      japanese: "札幌、北海道、日本（リモート）",
+    },
+    {
+      english: "Higashiyama-ku, Kyoto, Japan (On-site)",
+      japanese: "東山区、京都、日本（オンサイト）",
+    },
+  ];
 
   const fetchData = async () => {
     setIsLoading(true); // Set loading to true when fetching data
@@ -126,22 +183,31 @@ const Jobs = () => {
       <div className={styles.top}>
         <div className={styles.center}>
           <div className={styles.heading}>
-            <div >Search Developer Jobs in Japan</div>
+            {language === "jap"
+              ? "Search Developer Jobs in Japan"
+              : "日本の開発者の仕事を検索"}
           </div>
           <div className={styles.subHeading}>
             <p>
-              🔍 No Japanese required. Apply from overseas. Top companies only.
+              {language === "jap"
+                ? "🔍 No Japanese required. Apply from overseas. Top companies only."
+                : "🔍 日本語は必要ありません。海外から応募してください。トップ企業のみ。"}
             </p>
             <p>
-              Explore our hand-picked list of the {jobData.length} best software
-              developer & tech jobs in Japan.
+              {language === "jap"
+                ? `Explore our hand-picked list of the ${jobData.length} best software developer & tech jobs in Japan.`
+                : `手厳選した${jobData.length}件の最高のソフトウェア開発者・テックジョブを日本で探索する。`}
             </p>
           </div>
           <div className={styles.search}>
             <input
               className={`${styles.inputClicked} ${styles.searchInput}`}
               type="text"
-              placeholder="Search Company or Job Name"
+              placeholder={
+                language === "jap"
+                  ? "Search Company or Job Name"
+                  : "企業名または仕事名を検索"
+              }
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
@@ -151,7 +217,7 @@ const Jobs = () => {
       <div className={styles.content}>
         <div className={styles.right}>
           <div onClick={() => setFilter(!filter)} className={styles.title}>
-            <p> FILTERS</p>
+            <p>{language === "jap" ? "FILTERS" : "フィルター"}</p>
             <div className={styles.svg1}>
               <svg
                 height="20"
@@ -175,7 +241,7 @@ const Jobs = () => {
                   onClick={() => setJobDropdwon(!jobDropdwon)}
                   className={styles.title}
                 >
-                  <p>Job Type</p>
+                  {language === "jap" ? "Job Type" : "職種"}
                   <div className={styles.svg}>
                     <svg
                       height="20"
@@ -201,24 +267,24 @@ const Jobs = () => {
                     }`}
                     onClick={() => handleJobTypeClick("All Types")}
                   >
-                    All Types
+                    {language === "jap" ? " All Types" : "すべての種類"}
                   </div>
                   {jobDropdwon &&
-                    Array.from(new Set(jobData.map((job) => job.type))).map(
-                      (jobType, index) => (
-                        <div
-                          key={index}
-                          className={`${styles.el} ${
-                            selectedJobTypes.includes(jobType)
-                              ? styles.active
-                              : ""
-                          }`}
-                          onClick={() => handleJobTypeClick(jobType)}
-                        >
-                          {jobType}
-                        </div>
-                      )
-                    )}
+                    jobTypeTranslations.map((translation, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.el} ${
+                          selectedJobTypes.includes(translation.english)
+                            ? styles.active
+                            : ""
+                        }`}
+                        onClick={() => handleJobTypeClick(translation.english)}
+                      >
+                        {language === "EN"
+                          ? translation.japanese
+                          : translation.english}
+                      </div>
+                    ))}
                 </div>
               </div>
               <div className={styles.data}>
@@ -226,7 +292,7 @@ const Jobs = () => {
                   onClick={() => setLocaDropdwon(!locaDropdwon)}
                   className={styles.title}
                 >
-                  <p>Location</p>
+                  <p>{language === "EN" ? "場所" : "Location"}</p>
                   <div className={styles.svg}>
                     <svg
                       height="20"
@@ -252,23 +318,30 @@ const Jobs = () => {
                     }`}
                     onClick={() => handleLocationClick("All Locations")}
                   >
-                    All Location
+                    {language === "EN" ? "すべての場所" : "All Locations"}
                   </div>
                   {locaDropdwon &&
                     Array.from(new Set(jobData.map((job) => job.location))).map(
-                      (jobLocation, index) => (
-                        <div
-                          key={index}
-                          className={`${styles.el1} ${
-                            selectedLocations.includes(jobLocation)
-                              ? styles.active
-                              : ""
-                          }`}
-                          onClick={() => handleLocationClick(jobLocation)}
-                        >
-                          {jobLocation}
-                        </div>
-                      )
+                      (jobLocation, index) => {
+                        const translatedLocation = locationTranslations.find(
+                          (translation) => translation.english === jobLocation
+                        );
+                        return (
+                          <div
+                            key={index}
+                            className={`${styles.el1} ${
+                              selectedLocations.includes(jobLocation)
+                                ? styles.active
+                                : ""
+                            }`}
+                            onClick={() => handleLocationClick(jobLocation)}
+                          >
+                            {language === "EN"
+                              ? translatedLocation?.japanese || jobLocation
+                              : jobLocation}
+                          </div>
+                        );
+                      }
                     )}
                 </div>
               </div>
@@ -284,7 +357,7 @@ const Jobs = () => {
           {visibleJobs < filteredJobs.length && (
             <div className={styles.showMoreBtnContainer}>
               <div onClick={handleShowMore} className={styles.btn}>
-                Show More
+              {language === "jap" ? "Show More" : "もっと見る"}
               </div>
             </div>
           )}

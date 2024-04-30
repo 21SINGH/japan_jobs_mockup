@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LanContext from "@/context/lanContext";
 
 export const Navbar = () => {
+  const {language, toggleLanguage} = useContext(LanContext);
   const Router = useRouter();
 
   const [lightMode, setLightMode] = useState(() => {
@@ -53,8 +55,11 @@ export const Navbar = () => {
           </div>
         </div>
         <div className={styles.left}>
+        <div className={styles.text} onClick={toggleLanguage}>
+            {language === "jap" ? "日本語" : "EN"}
+          </div>
           <div className={styles.text}>
-            <Link href="/jobs">Search jobs</Link>
+            <Link href="/jobs">{language === "EN" ? "仕事を検索" : "Search jobs"}</Link>
           </div>
           <div onClick={toggleStyle} className={styles.el}>
             {!lightMode ? "☼" : "✸"}

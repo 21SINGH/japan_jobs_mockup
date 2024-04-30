@@ -1,11 +1,12 @@
 "use client";
 import AuroraHero from "@/components/AuroHero";
-import React, { useState , useRef, useEffect} from "react";
+import React, { useState , useRef, useEffect, useContext} from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
+import LanContext from "@/context/lanContext";
 
 const Page = () => {
-
+  const {language} = useContext(LanContext);
   return (
     <div>
       <AuroraHero />
@@ -13,19 +14,23 @@ const Page = () => {
         <div className={styles.top}>
           <div className={styles.center}>
             <div className={styles.heading}>
-              <h1>Japanese Work Culture.</h1>
+            <h1>{language === "jap" ? "Japanese Work Culture." : "日本の仕事文化"}</h1>
             </div>
             <div className={styles.subHeading}>
-              <p>
-              Discover the essence of Japanese work culture with us, 
+            <p>
+                {language === "jap"
+                  ? "Discover the essence of Japanese work culture with us,"
+                  : "私たちと一緒に日本の仕事文化の本質を発見してください。"}
               </p>
               <p>
-             your gateway to professional excellence in the Land of the Rising Sun.
+                {language === "jap"
+                  ? "your gateway to professional excellence in the Land of the Rising Sun."
+                  : "昇る太陽の国での専門的な卓越性へのゲートウェイ。"}
               </p>
             </div>
             <div className={styles.button}>
               <Link href="/jobs">
-                 Jobs In Japan{" "}
+              {language === "jap" ? "View Jobs In Japan" : "日本の仕事を見る"}
                 <svg
                   width="9"
                   height="8"
